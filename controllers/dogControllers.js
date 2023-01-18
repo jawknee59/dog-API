@@ -12,6 +12,7 @@ const router = express.Router()
 //////////////////////////////
 //// Routes               ////
 //////////////////////////////
+// This is my seed route
 router.get('/seed', (req, res) => {
     // array of starter dogs
     const startDogs = [
@@ -52,6 +53,18 @@ router.get('/seed', (req, res) => {
                 })
                 .catch(err => console.log('The following error occurredd: \n', err))
         })
+})
+
+// INDEX route
+// Read -> finds and displays the dogs
+router.get('/', (req, res) => {
+    // find all of the dogs
+    Dog.find({})
+        // promise chain
+        // send json if successful
+        .then(dogs => {res.json({ dogs: dogs })})
+        // catch errors if they occur
+        .catch(err => {console.log(err)})
 })
 
 //////////////////////////////
