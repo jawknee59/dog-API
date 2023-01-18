@@ -1,21 +1,29 @@
 /////////////////////////////////////////////////////////////
-//// Our Schema and Model for the fruit resource         ////
+//// Our Schema and Model for the dog resource           ////
 /////////////////////////////////////////////////////////////
-const mongooose = require('mongoose')
+const mongoose = require('../utils/connection')
 
 // Destructure the Schema and model functions from mongoose
-const { Schema, model } = mongooose
+const { Schema, model } = mongoose
 
 // Dog schema
 const dogSchema = new Schema ({
-    name: String,
-    breed: String,
-    gender: String,
-    dob: Date,
-    adopted: Boolean
-}, {
-    timestamps: true
-})
+    name: {
+        type: String
+    },
+    breed:{ 
+        type: String
+    },
+    gender:{ 
+        type: String
+    },
+    dob:{ 
+        type: Date
+    },
+    vaccinations:{ 
+        type: Boolean
+    }
+}, { timestamps: true })
 
 // make the dog model
 // the model method takes two arg

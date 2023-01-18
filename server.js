@@ -2,8 +2,9 @@
 //// Import Dependencies         ////
 /////////////////////////////////////
 const express = require('express')
-//const mongoose = require('mongooose')
-
+const morgan = require('morgan')
+require('dotenv').config()
+const DogRouter = require('./controllers/dogControllers')
 
 /////////////////////////////////////
 //// Create our Express App Object //
@@ -11,16 +12,17 @@ const express = require('express')
 const app = express()
 
 /////////////////////////////////////
-//// Database Connection         ////
+//// Middleware                  ////
 /////////////////////////////////////
 
 /////////////////////////////////////
 //// Routes                      ////
 /////////////////////////////////////
 app.get('/', (req, res) => {
-    res.send('Server is live, ready for requests')
+    res.send('Woof woof, server is live!')
 })
 
+app.use('/dogs', DogRouter)
 
 /////////////////////////////////////
 //// Server Listener             ////
@@ -29,3 +31,4 @@ const PORT = 3000
 app.listen(PORT, () => console.log(`Port is listening on: ${PORT}`))
 
 // END
+
