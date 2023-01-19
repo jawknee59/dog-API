@@ -22,6 +22,13 @@ const dogSchema = new Schema ({
     },
     vaccinations:{ 
         type: Boolean
+    },
+    owner: {
+        // this is where we set up an objectId reference
+        // by declaring that as the type
+        type: Schema.Types.ObjectId,
+        // this line tells us which model to look at
+        ref: 'User'
     }
 }, { timestamps: true })
 

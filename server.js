@@ -6,6 +6,7 @@ const morgan = require('morgan') // import the morgan request logger
 require('dotenv').config() // Load my ENV file's variables
 // const path = require('path') // import path module
 const DogRouter = require('./controllers/dogControllers')
+const UserRouter = require('./controllers/userControllers')
 // const bp = require('body-parser')
 const middleware = require('./utils/middleware')
 
@@ -28,6 +29,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/dogs', DogRouter)
+app.use('/users', UserRouter)
 
 /////////////////////////////////////
 //// Server Listener             ////
