@@ -79,6 +79,20 @@ router.post('/', (req, res) => {
     .catch(err => {console.log(err)})
 })
 
+// SHOW route
+// Read -> finds and displays a single resource
+router.get('/:id', (req, res) => {
+    // get the id -> save to a variable
+    const id = req.params.id
+    // use a mongoose method to find using that id
+    Dog.findById(id)
+        // send the fruit as json upon success
+        .then(dog => {
+            res.json({ dog: dog })
+        })
+        // catch any errors
+        .catch(err => console.log(err))
+})
 
 //////////////////////////////
 //// Export Router        ////
