@@ -1,10 +1,14 @@
 /////////////////////////////////////
 //// Import Dependencies         ////
 /////////////////////////////////////
-const express = require('express')
-const morgan = require('morgan')
-require('dotenv').config()
+const express = require('express') // import the express framework
+const morgan = require('morgan') // import the morgan request logger
+require('dotenv').config() // Load my ENV file's variables
+// const path = require('path') // import path module
 const DogRouter = require('./controllers/dogControllers')
+// const bp = require('body-parser')
+const middleware = require('./utils/middleware')
+
 
 /////////////////////////////////////
 //// Create our Express App Object //
@@ -14,6 +18,7 @@ const app = express()
 /////////////////////////////////////
 //// Middleware                  ////
 /////////////////////////////////////
+middleware(app)
 
 /////////////////////////////////////
 //// Routes                      ////
@@ -27,7 +32,7 @@ app.use('/dogs', DogRouter)
 /////////////////////////////////////
 //// Server Listener             ////
 /////////////////////////////////////
-const PORT = 3000
+const PORT = process.env.PORT
 app.listen(PORT, () => console.log(`Port is listening on: ${PORT}`))
 
 // END

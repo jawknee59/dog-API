@@ -53,7 +53,7 @@ router.get('/seed', (req, res) => {
                 })
                 .catch(err => console.log('The following error occurredd: \n', err))
         })
-})
+}) 
 
 // INDEX route
 // Read -> finds and displays the dogs
@@ -66,6 +66,19 @@ router.get('/', (req, res) => {
         // catch errors if they occur
         .catch(err => {console.log(err)})
 })
+
+// CREATE route
+// Create -> receives a request body, and creates a new document in the database
+router.post('/', (req, res) => {
+    // console.log('This is req.body: \n', req.body)
+    const newDog = req.body
+    Dog.create(newDog)
+    .then(dog => {
+        res.status(201).json({ dog: dog.toObject() })
+    })
+    .catch(err => {console.log(err)})
+})
+
 
 //////////////////////////////
 //// Export Router        ////
