@@ -79,6 +79,27 @@ router.post('/', (req, res) => {
     .catch(err => {console.log(err)})
 })
 
+// PUT route
+// Update -> updates a specific fruit
+// PUT replaces the entire document with a new document from the req.body
+// PATCH is able to update specific fields at specific times, but it requires a little more code to ensure that it works properly, so we'll use that later
+router.put('/:id', (req, res) => {
+    // save the id to a variable for easy use later
+    const id = req.params.id
+    // save the request body to a variable for easy reference later
+    const updatedDog = req.body
+    // we're going to use the mongoose method:
+    // findByIdAndUpdate
+    // eventually we'll change how this route works, but for now, we'll do everything in one shot, with findByIdAndUpdate
+    Dog.findByIdAndUpdate(id, updatedDog, { new: true })
+        .then(dog => {
+            console.log('the newly updated dog', dog)
+            // update success message will just be a 204 - no content
+            res.sendStatus(204)
+        })
+        .catch(err => console.log(err))
+})
+
 // SHOW route
 // Read -> finds and displays a single resource
 router.get('/:id', (req, res) => {
