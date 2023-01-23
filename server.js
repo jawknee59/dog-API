@@ -4,16 +4,18 @@
 const express = require('express') // import the express framework
 const morgan = require('morgan') // import the morgan request logger
 require('dotenv').config() // Load my ENV file's variables
-// const path = require('path') // import path module
+const path = require('path') // import path module
 const DogRouter = require('./controllers/dogControllers')
 const UserRouter = require('./controllers/userControllers')
-// const bp = require('body-parser')
+const CommentRouter = require('./controllers/commentControllers')
+const bp = require('body-parser')
 const middleware = require('./utils/middleware')
 
 
 /////////////////////////////////////
 //// Create our Express App Object //
 /////////////////////////////////////
+// const app = express()
 const app = express()
 
 /////////////////////////////////////
@@ -29,6 +31,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/dogs', DogRouter)
+app.use('/comments', CommentRouter )
 app.use('/users', UserRouter)
 
 /////////////////////////////////////

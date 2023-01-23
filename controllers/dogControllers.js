@@ -12,11 +12,14 @@ const router = express.Router()
 //////////////////////////////
 //// Routes               ////
 //////////////////////////////
+
 // INDEX route
 // Read -> finds and displays the dogs
 router.get('/', (req, res) => {
     // find all of the dogs
     Dog.find({})
+        .populate('owner', 'username')
+        .populate('comments.author', '-password')
         // promise chain
         // send json if successful
         .then(dogs => {res.json({ dogs: dogs })})
@@ -49,7 +52,8 @@ router.post('/', (req, res) => {
 router.get('/mine', (req, res) => {
     // find dogs by ownership, using the req.session info
     Dog.find({ owner: req.session.userId })
-        .populate('owner', '-password')
+        .populate('owner', '-username')
+        .populate('comments.author', '-password')
         .then(dogs => {
             // if found, display the dogs
             res.status(200).json({ dogs: dogs })
@@ -114,6 +118,7 @@ router.get('/:id', (req, res) => {
     const id = req.params.id
     // use a mongoose method to find using that id
     Dog.findById(id)
+        .populate('comments.author', 'username')
         // send the dog as json upon success
         .then(dog => {
             res.json({ dog: dog })

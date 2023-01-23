@@ -30,7 +30,6 @@ db.on('open', () => {
             breed: 'German Shepherd', 
             gender: 'male',
             dob: new Date(2019, 2, 4),
-            loves: [], 
             vaccinations: false 
         }, {
             name: 'Bella', 
@@ -41,7 +40,7 @@ db.on('open', () => {
         }
     ]
     // delete every dog in the database
-    Dog.deleteMany({ owner:null })
+    Dog.deleteMany({ owner: null })
         .then(() => {
             // then we'll seed(create) our starter dogs
             Dog.create(startDogs)

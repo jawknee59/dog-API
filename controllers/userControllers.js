@@ -92,7 +92,7 @@ router.post('/login', async (req, res) => {
 router.delete('/logout', (req, res) => {
     // destroy the session and send an appropriate response
     req.session.destroy(() => {
-        console.log('this is req.session upon logout \n', req.session)
+        // console.log('this is req.session upon logout \n', req.session)
         // eventually we will redirect users here, but thats after adding the view layer
         res.sendStatus(204)
     })

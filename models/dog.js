@@ -2,6 +2,7 @@
 //// Our Schema and Model for the dog resource           ////
 /////////////////////////////////////////////////////////////
 const mongoose = require('../utils/connection')
+const commentSchema = require('./comment')
 
 // Destructure the Schema and model functions from mongoose
 const { Schema, model } = mongoose
@@ -29,7 +30,8 @@ const dogSchema = new Schema ({
         type: Schema.Types.ObjectId,
         // this line tells us which model to look at
         ref: 'User'
-    }
+    },
+    comments: [commentSchema]
 }, { timestamps: true })
 
 // make the dog model
