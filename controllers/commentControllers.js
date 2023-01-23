@@ -31,14 +31,17 @@ router.post('/:dogId', (req, res) => {
                 return dog.save()
             })
             .then(dog => {
-                res.status(201).json({ dog: dog })
+                // res.status(201).json({ dog: dog })
+                res.redirect(`/dogs/${dog.id}`)
             })
             .catch(err => {
                 console.log(err)
-                res.status.json(err)
+                // res.status.json(err)
+                res.redirect(`/error?error=${err}`)
             })
     } else {
-        res.sendStatus(401) 
+        // res.sendStatus(401) 
+        res.redirect(`/error?error=You%20Are%20not%20allowed%20to%20comment%20on%20this%20dog`)
     }
 })
 
@@ -59,19 +62,23 @@ router.delete('/delete/:dogId/:commId', (req, res) => {
                     // we can use another built in method - remove()
                     theComment.remove()
                     dog.save()
-                    res.sendStatus(204) //send 204 no content
+                    // res.sendStatus(204) //send 204 no content
+                    res.redirect(`/dogs/${dog.id}`)
                 } else {
                     // otherwise send a 401 - unauthorized status
-                    res.sendStatus(401)
+                    // res.sendStatus(401)
+                    res.redirect(`/error?error=You%20Are%20not%20allowed%20to%20delete%20this%20comment`)
                 }
             } else {
                 // otherwise send a 401 - unauthorized status
-                res.sendStatus(401)
+                // res.sendStatus(401)
+                res.redirect(`/error?error=You%20Are%20not%20allowed%20to%20delete%20this%20comment`)
             }
         })
         .catch(err => {
             console.log(err)
             res.status(400).json(err)
+            res.redirect(`/error?error=${err}`)
         })
 })
 

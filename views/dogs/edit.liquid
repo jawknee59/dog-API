@@ -1,0 +1,44 @@
+{% layout 'layout.liquid' %}
+{% block content %}
+    <div class="container-sm">
+        <form action="/dogs/{{dog.id}}?_method=PUT" method="POST">
+            <fieldset>
+                <legend>Edit {{ dog.name }}</legend>
+                <label class="form-label">Name:</label>
+                <input 
+                    type="text" class="form-control" 
+                    name="name" placeholder="Change the dog's name"
+                    required value="{{ dog.name }}"
+                >
+                <label class="form-label">Breed:</label>
+                <input 
+                    type="text" class="form-control" 
+                    name="breed" placeholder="What is the dog's breed"
+                    required value="{{ dog.breed }}"
+                >
+                <label class="form-label">Gender:</label>
+                <input 
+                    type="text" class="form-control" 
+                    name="gender" placeholder="What is the gender?"
+                    required value="{{ dog.gender }}"
+                >
+                <label class="form-label">Date of Birth:</label>
+                <input 
+                    type="date" class="form-control" 
+                    name="dob" 
+                    required value="{{ dog.dob }}"
+                >
+                <label class="form-label">Vaccinations:</label>
+                <input 
+                    type="checkbox" class="form-check-control" 
+                    name="vaccinations"
+                    {% if dog.vaccinations %}
+                        checked
+                    {% endif %}
+                >
+            </fieldset>
+            <input type="submit" class="btn btn-success" value="Edit {{ dog.name }}">
+            <a href="/dogs/{{ dog.id }}" class="btn btn-warning">Back</a>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% layout 'layout.liquid' %}
+{% block content %}
+    <div class="container-sm">
+        <form action="/dogs" method="POST">
+            <fieldset>
+                <legend>Create New Dog</legend>
+                <label class="form-label">Name:</label>
+                <input 
+                    type="text" class="form-control" 
+                    name="name" placeholder="What is the dog's name?"
+                    required
+                >
+                <label class="form-label">Breed:</label>
+                <input 
+                    type="text" class="form-control" 
+                    name="breed" placeholder="What type of breed is it?"
+                    required
+                >
+                <label class="form-label">Gender:</label>
+                <input 
+                    type="text" class="form-control" 
+                    name="gender" placeholder="What is the gender?"
+                    required
+                >
+                <label class="form-label">Date of Birth:</label>
+                <input 
+                    type="date" class="form-control" 
+                    name="dob" 
+                    required
+                >
+                <label class="form-label">Vaccinations:</label>
+                <input 
+                    type="checkbox" class="form-check-control" 
+                    name="vaccinations"
+                >
+            </fieldset>
+            <input type="submit" class="btn btn-success" value="Create New Dog">
+        </form>
+    </div>
+{% endblock %}
+

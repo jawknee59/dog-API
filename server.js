@@ -16,7 +16,7 @@ const middleware = require('./utils/middleware')
 //// Create our Express App Object //
 /////////////////////////////////////
 // const app = express()
-const app = express()
+const app = require('liquid-express-views')(express())
 
 /////////////////////////////////////
 //// Middleware                  ////
@@ -27,12 +27,29 @@ middleware(app)
 //// Routes                      ////
 /////////////////////////////////////
 app.get('/', (req, res) => {
-    res.send('Woof woof, server is live!')
+    // destructure our user info
+    const { username, loggedIn, userId } = req.session
+    res.render('home.liquid', { username, loggedIn, userId })
 })
 
 app.use('/dogs', DogRouter)
 app.use('/comments', CommentRouter )
 app.use('/users', UserRouter)
+
+// this renders our error page
+// gets the error from a url req query
+app.get('/error', (req, res) => {
+    const error = req.query.error || 'This page does not exist'
+    // const { username, loggedIn, userId } = req.session
+    // instead of destructuring this time, we show we can also
+    // use the spread operator, which says "use all the parts of req.session" when you type ...req.session
+    res.render('error.liquid', { error, ...req.session })
+})
+
+// this catchall route will redirect a user to the error page
+app.all('*', (req, res) => {
+    res.redirect('/error')
+})
 
 /////////////////////////////////////
 //// Server Listener             ////

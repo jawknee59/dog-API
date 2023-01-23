@@ -1,0 +1,36 @@
+{% layout 'layout.liquid' %}
+{% block content %}
+    <!-- we need to account for two conditions here -->
+    <!-- first, if we have dogs in our array -->
+    <!-- second, if there are no dogs in the array -->
+    {% if dogs.length > 0 %}
+        <div class="container-md">
+            <h2>All Dogs</h2>
+            <div class="row">
+                {% for dog in dogs %}
+                    <div class="card me-3 mb-3" style="width: 18rem;">
+                        <h5 class="card-header">{{dog.name}}</h5>
+                        <div class="card-body">
+                            <p class="card-text">Breed: {{dog.breed}}</p>
+                            <p class="card-text">Gender: {{dog.gender}}</p>
+                            <p class="card-text">dob: {{dog.dob}}</p>
+                            <p class="card-text"> Vaccinations? :
+                                {% if dog.vaccinations %}
+                                    Yes
+                                {% else %}
+                                    No
+                                {% endif %}
+                            </p>
+                            
+                            <a href="/dogs/{{dog.id}}" class="btn btn-info">View {{dog.name}}</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% else %}
+        <div class="container-md">
+            <h2>No dogs yet... Go create some!</h2>
+        </div>
+    {% endif %}
+{% endblock %}
